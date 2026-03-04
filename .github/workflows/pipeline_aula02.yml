@@ -29,4 +29,4 @@ deploy:
   needs: build
   steps:
     - name: Simular deploy
-      run: echo “Deploy realizado com sucesso”
+      run: echo “Deploy realizado com sucesso"
