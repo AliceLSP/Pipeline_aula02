@@ -26,7 +26,7 @@ jobs:
         run: npm ci
 
       - name: Gerar artefato ZIP
-        run: zip -r pipeline-demo.zip .
+        run: zip -r pipeline-demo.zip . -x "node_modules/*" ".git/*"
 
       - name: Publicar artefato
         uses: actions/upload-artifact@v4
@@ -59,7 +59,7 @@ jobs:
           name: codigo-buildado
 
       - name: Extrair artefato
-        run: unzip pipeline-demo.zip
+        run: unzip -o pipeline-demo.zip
 
   deploy: 
     runs-on: ubuntu-latest
