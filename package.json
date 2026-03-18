@@ -8,5 +8,14 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint ."
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "lines": 70,
+        "coverage": "jest --coverage"
+      }
+    }
   }
 }
