@@ -3,10 +3,10 @@ on:
   push:
     branches: 
       - main
-  pull_request:
-    branches:
-      - main
-      
+
+# Na branch dev a lógica se mantém em push e pull request (CI) 
+# Na branch main a lógica seria apenas um push (CD)
+
 jobs: 
 
   build: 
