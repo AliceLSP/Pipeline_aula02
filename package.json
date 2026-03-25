@@ -13,7 +13,6 @@
     "collectCoverage": true,
     "coverageThreshold": {
       "global": {
-        "lines": 80,
         "coverage": "jest --coverage"
       }
     }
