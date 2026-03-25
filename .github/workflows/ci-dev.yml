@@ -2,7 +2,7 @@ name: Pipeline aula 03 - Branch dev
 on: 
   push:
     branches: 
-      - dev
+      - main
   pull_request:
     branches:
       - main
@@ -24,6 +24,15 @@ jobs:
 
       - name: Instalar dependências
         run: npm install
+
+      - name: Análise com SonarCloud 
+        uses: SonarSource/sonarcloud-github-action@v2 
+        with: 
+          args: > 
+            -Dsonar.projectKey=AliceLSP_Pipeline_aula02
+            -Dsonar.organization=alicelsp 
+        env: 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Rodar lint
         run: npm run lint
