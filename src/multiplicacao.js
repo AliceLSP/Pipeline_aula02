@@ -1,4 +1,5 @@
 require('dotenv').config();
+let pass = process.env.PASSWORD;
 
 function multiplicacao(a, b){
     return a * b;
@@ -6,9 +7,8 @@ function multiplicacao(a, b){
 
 function soma(a, b) { 
     let resultado = a + b; 
-    let x = 10; // variável inútil
-    let pass = process.env.PASSWORD; 
-    console.log(pass)
+    let x = 10; // variável inútil 
+
     return resultado; 
 }
 
