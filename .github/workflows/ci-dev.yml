@@ -19,7 +19,7 @@ jobs:
       - name: Instalar Node
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: ${{ matrix.node-version }}
 
       - name: Cache de dependencias
         uses: actions/cache@v4
@@ -47,7 +47,7 @@ jobs:
       - name: Instalar Node
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: ${{ matrix.node-version }}
 
       - name: Cache de dependencias
         uses: actions/cache@v4
@@ -68,8 +68,8 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@v2 
         with: 
           args: > 
-            -Dsonar.projectKey=edutbx_testepipeline-js
-            -Dsonar.organization=edutbx
+            -Dsonar.projectKey=AliceLSP_Pipeline_aula02
+            -Dsonar.organization=alicelsp
         env: 
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
@@ -85,7 +85,7 @@ jobs:
       - name: Instalar Node
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: ${{ matrix.node-version }}
 
       - name: Cache de dependencias
         uses: actions/cache@v4
@@ -127,7 +127,7 @@ jobs:
       - name: Instalar Node
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: ${{ matrix.node-version }}
 
       - name: Cache de dependencias
         uses: actions/cache@v4
