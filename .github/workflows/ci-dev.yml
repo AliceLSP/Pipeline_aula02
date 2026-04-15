@@ -86,61 +86,29 @@ jobs:
       - name: Checkout código
         uses: actions/checkout@v4
 
-      - name: Instalar Node
-        uses: actions/setup-node@v4
+      - name: Login no Docker Hub
+        uses: docker/login-action@v3
         with:
-          node-version: 24
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASS }}
 
-      - name: Cache de Dependencias
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{hashFiles('**/package-lock.json')}}
-
-      - name: Instalar dependências
-        run: npm install
-
-      - name: Gerar artefato
-        run: zip -r app.zip .
-
-      - name: Publicar artefato
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-build
-          path: app.zip
+      - name: Build e Push da Imagem
+        uses: docker/build-push-action@v5
+        with: 
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKER_USER }}/pipeline-ci:latest
 
   test:
-
     needs: build
-    strategy:
-        matrix:
-          node-version: [20, 22, 24]
-          os: [ubuntu-latest, windows-latest, macos-latest]
-
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Baixar artefato
-        uses: actions/download-artifact@v4
+      - name: Login no Docker Hub
+        uses: docker/login-action@v3
         with:
-          name: app-build       
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASS }}
 
-      - name: Extrair artefato
-        run: unzip app.zip
-
-      - name: Instalar Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Cache de Dependencias
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{hashFiles('**/package-lock.json')}}
-
-      - name: Instalar dependências
-        run: npm install
-
-      - name: Rodar testes
-        run: npm test
+      - name: Rodar testes dentro do Container
+        run: docker run ${{ secrets.DOCKER_USER }}/pipeline-ci:latest npm test

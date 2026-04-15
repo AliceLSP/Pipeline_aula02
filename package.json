@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint .",
-    "coverage": "jest -- --coverage"
+    "coverage": "jest -- --coverage",
+    "start": "node src/multiplicacao.js"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
